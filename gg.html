@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Para a Gisele ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent; /* Remove highlight no iOS */
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: visible; /* Não ocultar overflow para não bloquear toque */
+      -webkit-overflow-scrolling: touch;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .background-glow {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+      animation: pulseGlow 6s infinite alternate;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes pulseGlow {
+      0% {opacity: 0.4;}
+      100% {opacity: 0.7;}
+    }
+
+    /* Corações pequenos */
+    .small-heart {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: #ff4d6d;
+      transform: rotate(45deg);
+      opacity: 0.6;
+      animation: floatSmall 10s linear infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .small-heart::before,
+    .small-heart::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #ff4d6d;
+      border-radius: 50%;
+    }
+
+    .small-heart::before {
+      top: -6px;
+      left: 0;
+    }
+
+    .small-heart::after {
+      left: -6px;
+      top: 0;
+    }
+
+    @keyframes floatSmall {
+      0% {
+        transform: translateY(100vh) rotate(45deg) scale(1);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Partículas */
+    .particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .particle {
+      position: fixed;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: moveParticle 12s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes moveParticle {
+      from {
+        transform: translateY(0) translateX(0);
+        opacity: 0.2;
+      }
+      to {
+        transform: translateY(-100vh) translateX(50px);
+        opacity: 0;
+      }
+    }
+
+    /* Anéis brilhantes */
+    .glow-ring {
+      position: fixed;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      box-shadow: 0 0 25px 15px rgba(255, 192, 203, 0.5);
+      animation: spinGlow 10s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes spinGlow {
+      0% {transform: rotate(0deg) scale(1);}
+      100% {transform: rotate(360deg) scale(1.2);}
+    }
+
+    /* Letras "Gisele" flutuantes */
+    .floating-name {
+      position: fixed;
+      font-size: 14px;
+      font-weight: bold;
+      color: #ff4d6d;
+      opacity: 0.6;
+      font-family: 'Arial Black', Arial, sans-serif;
+      white-space: nowrap;
+      user-select: none;
+      pointer-events: none;
+      transform-origin: center center;
+      animation: floatSmallName 10s linear infinite;
+    }
+
+    @keyframes floatSmallName {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Caixa de pergunta */
+    .question-box {
+      position: relative;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+      padding: 30px 40px;
+      max-width: 320px;
+      text-align: center;
+      z-index: 10;
+      font-size: 1.3rem;
+      color: #333;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .question-box button {
+      background-color: #ff4d6d;
+      border: none;
+      padding: 10px 25px;
+      margin: 20px 8px 0 8px;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      min-width: 40px;
+    }
+
+    .question-box button:hover,
+    .question-box button:focus {
+      background-color: #ee3c58;
+      outline: none;
+    }
+
+    .response-text {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #ff4d6d;
+      font-weight: 600;
+      min-height: 40px;
+    }
+
+    /* Barra de nota */
+    .rating-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #ff4d6d;
+      font-weight: bold;
+    }
+
+    .rating-slider {
+      width: 100%;
+      margin-top: 10px;
+      -webkit-appearance: none;
+      height: 10px;
+      border-radius: 5px;
+      background: #ffd0d8;
+      outline: none;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .rating-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      background: #ff4d6d;
+      cursor: pointer;
+      border-radius: 50%;
+      border: 2px solid white;
+      margin-top: -7px;
+      transition: background-color 0.3s ease;
+    }
+
+    .rating-slider::-webkit-slider-thumb:hover {
+      background-color: #ee3c58;
+    }
+
+    /* para Firefox */
+    .rating-slider::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      background: #ff4d6d;
+      cursor: pointer;
+      border-radius: 50%;
+      border: 2px solid white;
+      transition: background-color 0.3s ease;
+    }
+    .rating-slider::-moz-range-thumb:hover {
+      background-color: #ee3c58;
+    }
+
+    /* Flex container para botões numerados */
+    #buttonsContainer {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-glow"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- Pequenos corações -->
+  <script>
+    for (let i = 0; i < 120; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'small-heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = Math.random() * 100 + 'vh';
+      heart.style.animationDelay = (Math.random() * 10) + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <!-- Partículas -->
+  <script>
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 80; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = (Math.random() * 4 + 2);
+      p.style.width = p.style.height = size + 'px';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      p.style.animationDelay = (Math.random() * 12) + 's';
+      particlesContainer.appendChild(p);
+    }
+  </script>
+
+  <!-- Anéis brilhantes -->
+  <script>
+    for (let i = 0; i < 5; i++) {
+      const ring = document.createElement('div');
+      ring.className = 'glow-ring';
+      ring.style.top = Math.random() * 100 + 'vh';
+      ring.style.left = Math.random() * 100 + 'vw';
+      document.body.appendChild(ring);
+    }
+  </script>
+
+  <!-- Nome Gisele flutuando -->
+  <script>
+    const nome = "Gisele";
+    for(let i = 0; i < 30; i++) {
+      const nameEl = document.createElement('div');
+      nameEl.className = 'floating-name';
+      nameEl.textContent = nome;
+      nameEl.style.left = Math.random() * 100 + 'vw';
+      nameEl.style.top = Math.random() * 100 + 'vh';
+      nameEl.style.animationDelay = (Math.random() * 10) + 's';
+      nameEl.style.transform = `rotate(${Math.random()*30 - 15}deg)`;
+      document.body.appendChild(nameEl);
+    }
+  </script>
+
+  <!-- Caixa de pergunta interativa -->
+  <div class="question-box" id="questionBox">
+    <div id="questionText">Você ainda lembra de mim?</div>
+    <div id="buttonsContainer">
+      <button id="btnSim">Sim</button>
+      <button id="btnNao">Não</button>
+    </div>
+    <div class="response-text" id="responseText"></div>
+  </div>
+
+  <script>
+    const questionText = document.getElementById('questionText');
+    const buttonsContainer = document.getElementById('buttonsContainer');
+    const responseText = document.getElementById('responseText');
+
+    const mensagens = {
+      1: 'caralho....',
+      2: 'ta melhorando',
+      3: 'mais um pouquinho',
+      4: 'só mais um pouco de esforço',
+      5: 'tá tão difícil assim',
+      6: 'razoável',
+      7: 'nem que sim nem que não',
+      8: 'tá quase',
+      9: 'o que falta para um 10',
+      10: 'então porque nós não tenta ao longo do tempo'
+    };
+
+    // Função que cria os botões numerados (1 a 10)
+    function criarSeletor() {
+      questionText.textContent = 'De 1 a 10, qual a chance de nós ainda dar em algo?';
+      responseText.textContent = '';
+      buttonsContainer.style.display = 'flex';
+      buttonsContainer.innerHTML = '';
+
+      for(let i = 1; i <= 10; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.setAttribute('data-value', i);
+        btn.style.flex = '1';
+        btn.style.margin = '0 4px';
+        btn.style.fontSize = '1.1rem';
+        btn.style.padding = '12px 0';
+        btn.addEventListener('click', () => {
+          processarResposta(i);
+        });
+        buttonsContainer.appendChild(btn);
+      }
+    }
+
+    // Processa a resposta do seletor de 1 a 10
+    function processarResposta(numero) {
+      responseText.textContent = mensagens[numero] || '';
+      if(numero !== 10) {
+        // Voltar para o seletor de número depois de 2 segundos
+        setTimeout(() => {
+          criarSeletor();
+        }, 2000);
+      } else {
+        // Para no 10, sem voltar
+        buttonsContainer.style.display = 'none';
+        questionText.textContent = 'Obrigado por responder! ❤️';
+      }
+    }
+
+    // Função para iniciar o fluxo
+    function iniciar() {
+      questionText.textContent = 'Você ainda lembra de mim?';
+      responseText.textContent = '';
+      buttonsContainer.style.display = 'flex';
+      buttonsContainer.innerHTML = '';
+
+      // Botões Sim e Não iniciais
+      const btnSim = document.createElement('button');
+      btnSim.textContent = 'Sim';
+      btnSim.addEventListener('click', () => {
+        criarSeletor();
+      });
+
+      const btnNao = document.createElement('button');
+      btnNao.textContent = 'Não';
+      btnNao.addEventListener('click', () => {
+        questionText.textContent = 'Que pena... Ainda tem jeito, tente responder de qualquer forma.';
+        responseText.textContent = '';
+        criarSeletor();
+      });
+
+      buttonsContainer.appendChild(btnSim);
+      buttonsContainer.appendChild(btnNao);
+    }
+
+    // Iniciar no carregamento da página
+    window.onload = iniciar;
+  </script>
+
+</body>
+</html>
